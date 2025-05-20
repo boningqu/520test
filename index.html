@@ -1,66 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise for You 💖</title>
+    <title>神秘520 - 惊喜大奖等着你</title>
     <style>
         body {
             text-align: center;
-            background: linear-gradient(to right, pink, red);
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
             color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Dancing Script', cursive;
+            padding: 20px;
         }
-        #videoContainer {
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+        p {
+            font-size: 22px;
+        }
+        .btn {
+            background-color: red;
+            color: white;
+            font-size: 20px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+        #uploadSection {
             display: none;
             margin-top: 20px;
         }
-        button {
-            background-color: red;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: darkred;
+        #preview {
+            max-width: 200px;
+            border-radius: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <h2>Upload a photo to unlock your surprise! 💖</h2>
+    <h1>神秘520，惊喜大奖等着你！</h1>
+    <p>点击参与活动</p>
+    <button class="btn" onclick="startEvent()">立即参与</button>
 
-    <!-- Romantic Background Music -->
-    <audio autoplay loop>
-        <source src="romantic_music.mp3" type="audio/mpeg">
-    </audio>
-
-    <input type="file" id="photoUpload" accept="image/*">
-    <button onclick="showVideo()">Upload</button>
-
-    <div id="videoContainer">
-        <h3>Here's your special video! 🎥💖</h3>
-        <video controls>
-            <source src="your-video.mp4" type="video/mp4">
-        </video>
+    <!-- Upload Section -->
+    <div id="uploadSection">
+        <h3>💋 上传最甜蜜的吻照，给你的爱人 🎉</h3>
+        <form action="https://formsubmit.co/your-email@example.com" method="POST" enctype="multipart/form-data">
+            <input type="file" name="attachment" id="photoUpload" accept="image/*" onchange="previewImage(event)">
+            <input type="hidden" name="_subject" value="新照片上传!">
+            <br>
+            <img id="preview">
+            <br>
+            <button class="btn" type="submit">提交照片</button>
+        </form>
     </div>
 
     <script>
-        document.getElementById("photoUpload").addEventListener("change", function(event) {
-            if (event.target.files.length > 0) {
-                document.getElementById("videoContainer").style.display = "block";
-            } else {
-                alert("Please select a photo!");
-            }
-        });
+        function startEvent() {
+            document.getElementById("uploadSection").style.display = "block";
+        }
 
-        function showVideo() {
-            let fileInput = document.getElementById("photoUpload");
-            if (fileInput.files.length > 0) {
-                document.getElementById("videoContainer").style.display = "block";
-            } else {
-                alert("Please upload a photo first!");
+        function previewImage(event) {
+            let file = event.target.files[0];
+            if (file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("preview").src = e.target.result;
+                    document.getElementById("preview").style.display = "block";
+                };
+                reader.readAsDataURL(file);
             }
         }
     </script>
