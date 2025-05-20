@@ -47,7 +47,7 @@
 <body>
     <h1>神秘520，惊喜大奖等着你！</h1>
     <p>点击参与活动</p>
-    <button class="btn" onclick="startEvent()">立即参与</button>
+    <button class="btn" id="attendBtn" onclick="startEvent()">立即参与</button>
 
     <!-- Upload Section -->
     <div id="uploadSection">
@@ -62,75 +62,4 @@
     <!-- Countdown Section -->
     <div id="countdownSection">
         <h3 id="countdownMessage">神秘男孩正在查看您的照片...</h3>
-        <h2 id="countdownTimer">10</h2>
-    </div>
-
-    <!-- Final Surprise Section -->
-    <div id="finalMessage">
-        <h3>🎉 最性感Kiss大奖属于你！ 🎉</h3>
-        <button class="btn" onclick="askForPassword()">点击领取惊喜</button>
-    </div>
-
-    <!-- Password Protection Before Video -->
-    <div id="passwordSection">
-        <p>请输入您的生日以解锁惊喜</p>
-        <input type="text" id="birthdayInput" placeholder="YYYYMMDD">
-        <button class="btn" onclick="checkPassword()">提交</button>
-    </div>
-
-    <!-- Video Surprise -->
-    <div id="videoContainer">
-        <h3>🎥 专属惊喜为你播放 💖</h3>
-        <iframe width="560" height="315" src="https://drive.google.com/file/d/YOUR_VIDEO_ID/preview" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <script>
-        function startEvent() {
-            document.getElementById("uploadSection").style.display = "block";
-        }
-
-        function previewImage(event) {
-            let file = event.target.files[0];
-            if (file) {
-                let reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById("preview").src = e.target.result;
-                    document.getElementById("preview").style.display = "block";
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function startCountdown() {
-            document.getElementById("uploadSection").style.display = "none";
-            document.getElementById("countdownSection").style.display = "block";
-
-            let countdown = 10;
-            let timer = setInterval(function() {
-                countdown--;
-                document.getElementById("countdownTimer").innerText = countdown;
-                if (countdown <= 0) {
-                    clearInterval(timer);
-                    document.getElementById("countdownSection").style.display = "none";
-                    document.getElementById("finalMessage").style.display = "block";
-                }
-            }, 1000);
-        }
-
-        function askForPassword() {
-            document.getElementById("finalMessage").style.display = "none";
-            document.getElementById("passwordSection").style.display = "block";
-        }
-
-        function checkPassword() {
-            let password = document.getElementById("birthdayInput").value;
-            if (password === "940102") {
-                document.getElementById("passwordSection").style.display = "none";
-                document.getElementById("videoContainer").style.display = "block";
-            } else {
-                alert("密码错误，请再试一次！");
-            }
-        }
-    </script>
-</body>
-</html>
+        <h2 id="countdownTimer
