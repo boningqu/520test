@@ -33,7 +33,7 @@
         .btn:hover {
             background-color: darkred;
         }
-        #uploadSection {
+        #passwordSection, #uploadSection, #countdownSection, #finalMessage, #videoContainer {
             display: none;
             margin-top: 20px;
         }
@@ -46,25 +46,51 @@
 </head>
 <body>
     <h1>神秘520，惊喜大奖等着你！</h1>
-    <p>点击参与活动</p>
-    <button class="btn" onclick="startEvent()">立即参与</button>
+    <p>请输入您的生日以参加活动</p>
+
+    <!-- Password Section -->
+    <div id="passwordSection">
+        <input type="text" id="birthdayInput" placeholder="YYYYMMDD">
+        <button class="btn" onclick="checkPassword()">提交</button>
+    </div>
 
     <!-- Upload Section -->
     <div id="uploadSection">
         <h3>💋 上传最甜蜜的吻照，给你的爱人 🎉</h3>
-        <form action="https://formsubmit.co/boningqu@gmail.com" method="POST" enctype="multipart/form-data">
-            <input type="file" name="attachment" id="photoUpload" accept="image/*" onchange="previewImage(event)">
-            <input type="hidden" name="_subject" value="新照片上传!">
-            <br>
-            <img id="preview">
-            <br>
-            <button class="btn" type="submit">提交照片</button>
-        </form>
+        <input type="file" id="photoUpload" accept="image/*" onchange="previewImage(event)">
+        <br>
+        <img id="preview">
+        <br>
+        <button class="btn" onclick="startCountdown()">提交照片</button>
+    </div>
+
+    <!-- Countdown Section -->
+    <div id="countdownSection">
+        <h3 id="countdownMessage">神秘男孩正在查看您的照片...</h3>
+        <h2 id="countdownTimer">10</h2>
+    </div>
+
+    <!-- Final Surprise Section -->
+    <div id="finalMessage">
+        <h3>🎉 最性感Kiss大奖属于你！ 🎉</h3>
+        <button class="btn" onclick="revealSurprise()">点击领取惊喜</button>
+    </div>
+
+    <!-- Video Surprise -->
+    <div id="videoContainer">
+        <h3>🎥 专属惊喜为你播放 💖</h3>
+        <iframe width="560" height="315" src="https://drive.google.com/file/d/YOUR_VIDEO_ID/preview" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <script>
-        function startEvent() {
-            document.getElementById("uploadSection").style.display = "block";
+        function checkPassword() {
+            let password = document.getElementById("birthdayInput").value;
+            if (password === "940102") {
+                document.getElementById("passwordSection").style.display = "none";
+                document.getElementById("uploadSection").style.display = "block";
+            } else {
+                alert("密码错误，请再试一次！");
+            }
         }
 
         function previewImage(event) {
@@ -77,6 +103,27 @@
                 };
                 reader.readAsDataURL(file);
             }
+        }
+
+        function startCountdown() {
+            document.getElementById("uploadSection").style.display = "none";
+            document.getElementById("countdownSection").style.display = "block";
+
+            let countdown = 10;
+            let timer = setInterval(function() {
+                countdown--;
+                document.getElementById("countdownTimer").innerText = countdown;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdownSection").style.display = "none";
+                    document.getElementById("finalMessage").style.display = "block";
+                }
+            }, 1000);
+        }
+
+        function revealSurprise() {
+            document.getElementById("finalMessage").style.display = "none";
+            document.getElementById("videoContainer").style.display = "block";
         }
     </script>
 </body>
