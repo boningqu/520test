@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise for You 💖</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to right, pink, red);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        #videoContainer {
+            display: none;
+            margin-top: 20px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h2>Upload a photo to unlock your surprise! 💖</h2>
+
+    <!-- Romantic Background Music -->
+    <audio autoplay loop>
+        <source src="romantic_music.mp3" type="audio/mpeg">
+    </audio>
+
+    <input type="file" id="photoUpload" accept="image/*">
+    <button onclick="showVideo()">Upload</button>
+
+    <div id="videoContainer">
+        <h3>Here's your special video! 🎥💖</h3>
+        <video controls>
+            <source src="your-video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        document.getElementById("photoUpload").addEventListener("change", function(event) {
+            if (event.target.files.length > 0) {
+                document.getElementById("videoContainer").style.display = "block";
+            } else {
+                alert("Please select a photo!");
+            }
+        });
+
+        function showVideo() {
+            let fileInput = document.getElementById("photoUpload");
+            if (fileInput.files.length > 0) {
+                document.getElementById("videoContainer").style.display = "block";
+            } else {
+                alert("Please upload a photo first!");
+            }
+        }
+    </script>
+</body>
+</html>
