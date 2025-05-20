@@ -33,29 +33,21 @@
         .btn:hover {
             background-color: darkred;
         }
-        #passwordSection, #uploadSection, #countdownSection, #finalMessage, #videoContainer {
+        #uploadSection, #countdownSection, #finalMessage, #videoContainer {
             display: none;
             margin-top: 20px;
         }
         #preview {
             max-width: 200px;
             border-radius: 10px;
-            display: block;
+            display: none;
         }
     </style>
 </head>
 <body>
     <h1>神秘520，惊喜大奖等着你！</h1>
-    <p>请输入您的生日以参加活动</p>
-
-    <!-- Password Section -->
-    <div id="passwordSection">
-        <input type="text" id="birthdayInput" placeholder="YYYYMMDD">
-        <button class="btn" onclick="checkPassword()">提交</button>
-    </div>
-    #passwordSection {
-    display: block;
-}
+    <p>点击参与活动</p>
+    <button class="btn" onclick="startEvent()">立即参与</button>
 
     <!-- Upload Section -->
     <div id="uploadSection">
@@ -82,18 +74,12 @@
     <!-- Video Surprise -->
     <div id="videoContainer">
         <h3>🎥 专属惊喜为你播放 💖</h3>
-        <iframe width="560" height="315" src="https://drive.google.com/file/d/16ZRqntpSsHqE-XnyPa32ebuOvz-OcvHE/preview" frameborder="0" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://drive.google.com/file/d/YOUR_VIDEO_ID/preview" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <script>
-        function checkPassword() {
-            let password = document.getElementById("birthdayInput").value;
-            if (password === "940102") {
-                document.getElementById("passwordSection").style.display = "none";
-                document.getElementById("uploadSection").style.display = "block";
-            } else {
-                alert("密码错误，请再试一次！");
-            }
+        function startEvent() {
+            document.getElementById("uploadSection").style.display = "block";
         }
 
         function previewImage(event) {
