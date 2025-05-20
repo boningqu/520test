@@ -33,7 +33,7 @@
         .btn:hover {
             background-color: darkred;
         }
-        #uploadSection, #countdownSection, #finalMessage, #videoContainer {
+        #uploadSection, #countdownSection, #finalMessage, #passwordSection, #videoContainer {
             display: none;
             margin-top: 20px;
         }
@@ -68,7 +68,14 @@
     <!-- Final Surprise Section -->
     <div id="finalMessage">
         <h3>🎉 最性感Kiss大奖属于你！ 🎉</h3>
-        <button class="btn" onclick="revealSurprise()">点击领取惊喜</button>
+        <button class="btn" onclick="askForPassword()">点击领取惊喜</button>
+    </div>
+
+    <!-- Password Protection Before Video -->
+    <div id="passwordSection">
+        <p>请输入您的生日以解锁惊喜</p>
+        <input type="text" id="birthdayInput" placeholder="YYYYMMDD">
+        <button class="btn" onclick="checkPassword()">提交</button>
     </div>
 
     <!-- Video Surprise -->
@@ -110,9 +117,19 @@
             }, 1000);
         }
 
-        function revealSurprise() {
+        function askForPassword() {
             document.getElementById("finalMessage").style.display = "none";
-            document.getElementById("videoContainer").style.display = "block";
+            document.getElementById("passwordSection").style.display = "block";
+        }
+
+        function checkPassword() {
+            let password = document.getElementById("birthdayInput").value;
+            if (password === "940102") {
+                document.getElementById("passwordSection").style.display = "none";
+                document.getElementById("videoContainer").style.display = "block";
+            } else {
+                alert("密码错误，请再试一次！");
+            }
         }
     </script>
 </body>
